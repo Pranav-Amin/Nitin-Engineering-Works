@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nitin Engineering Works — Precision Tool & Die</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f4f3ef;
+    --surface: #faf9f6;
+    --white: #ffffff;
+    --ink: #1a1917;
+    --ink-2: #4a4845;
+    --ink-3: #8a8784;
+    --accent: #c8440a;
+    --accent-2: #1a4fa8;
+    --line: rgba(26,25,23,0.1);
+    --line-2: rgba(26,25,23,0.06);
+    --font-display: 'Syne', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-display);
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(244,243,239,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+
+  .nav-logo-mark {
+    width: 32px; height: 32px;
+    border: 1.5px solid var(--ink);
+    display: grid; place-items: center;
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  .nav-logo-mark span {
+    display: block; width: 10px; height: 10px;
+    background: var(--accent);
+    transform: rotate(-45deg);
+  }
+
+  .nav-brand {
+    font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; line-height: 1.2;
+  }
+
+  .nav-brand small {
+    display: block; font-size: 0.6rem; font-weight: 400;
+    color: var(--ink-3); letter-spacing: 0.2em;
+    font-family: var(--font-mono);
+  }
+
+  .nav-links {
+    display: flex; gap: 2.5rem; list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none; color: var(--ink-2);
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  .nav-cta {
+    font-family: var(--font-mono);
+    font-size: 0.72rem; padding: 0.55rem 1.2rem;
+    border: 1px solid var(--ink);
+    background: transparent; color: var(--ink);
+    cursor: pointer; letter-spacing: 0.08em;
+    transition: all 0.2s; text-decoration: none;
+    display: inline-block;
+  }
+
+  .nav-cta:hover { background: var(--ink); color: var(--bg); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    padding: 7rem 3rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 55%; height: 100%;
+    background: var(--surface);
+    z-index: 0;
+    clip-path: polygon(8% 0, 100% 0, 100% 100%, 0% 100%);
+  }
+
+  .hero-grid-overlay {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(var(--line-2) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-2) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .hero-left {
+    position: relative; z-index: 1;
+  }
+
+  .hero-tag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem; letter-spacing: 0.2em;
+    color: var(--accent); text-transform: uppercase;
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 24px; height: 1px; background: var(--accent);
+  }
+
+  h1.hero-title {
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.3rem;
+  }
+
+  h1.hero-title em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .hero-subtitle {
+    font-size: 1rem; color: var(--ink-2);
+    margin: 1.5rem 0 2.5rem;
+    line-height: 1.7; max-width: 420px;
+    font-weight: 400;
+  }
+
+  .hero-actions {
+    display: flex; gap: 1rem; align-items: center;
+  }
+
+  .btn-primary {
+    font-family: var(--font-mono);
+    font-size: 0.78rem; padding: 0.85rem 1.8rem;
+    background: var(--ink); color: var(--bg);
+    border: none; cursor: pointer;
+    letter-spacing: 0.06em; text-decoration: none;
+    display: inline-block; transition: background 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--accent); }
+
+  .btn-ghost {
+    font-family: var(--font-mono);
+    font-size: 0.78rem; padding: 0.85rem 1.5rem;
+    border: 1px solid var(--line);
+    background: transparent; color: var(--ink-2);
+    cursor: pointer; letter-spacing: 0.06em;
+    text-decoration: none; display: inline-block;
+    transition: all 0.2s;
+  }
+
+  .btn-ghost:hover { border-color: var(--ink); color: var(--ink); }
+
+  .hero-stats {
+    margin-top: 3.5rem;
+    display: flex; gap: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .stat-num {
+    font-size: 2rem; font-weight: 800; letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+
+  .stat-label {
+    font-size: 0.7rem; font-family: var(--font-mono);
+    color: var(--ink-3); letter-spacing: 0.1em;
+    text-transform: uppercase; margin-top: 0.2rem;
+  }
+
+  .hero-right {
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+
+  .hero-img-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 220px 160px;
+    gap: 0.75rem;
+  }
+
+  .hero-img-grid .img-a {
+    grid-column: 1 / 2; grid-row: 1 / 2;
+    background: #d0cdc7;
+    overflow: hidden; position: relative;
+  }
+
+  .hero-img-grid .img-b {
+    grid-column: 2 / 3; grid-row: 1 / 3;
+    background: #c2bfb8;
+    overflow: hidden; position: relative;
+  }
+
+  .hero-img-grid .img-c {
+    grid-column: 1 / 2; grid-row: 2 / 3;
+    background: #b8b4ad;
+    overflow: hidden; position: relative;
+  }
+
+  .hero-img-grid img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block;
+    filter: sepia(10%) contrast(1.05);
+    transition: transform 0.5s ease;
+  }
+
+  .hero-img-grid div:hover img { transform: scale(1.04); }
+
+  .img-label {
+    position: absolute; bottom: 0.6rem; left: 0.6rem;
+    font-family: var(--font-mono); font-size: 0.6rem;
+    background: rgba(244,243,239,0.9);
+    padding: 0.25rem 0.5rem;
+    letter-spacing: 0.08em; color: var(--ink-2);
+  }
+
+  /* MARQUEE */
+  .marquee-strip {
+    background: var(--ink); color: var(--bg);
+    padding: 0.8rem 0; overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .marquee-inner {
+    display: inline-flex; gap: 3rem;
+    animation: marquee 20s linear infinite;
+  }
+
+  .marquee-item {
+    font-family: var(--font-mono); font-size: 0.72rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 1rem;
+  }
+
+  .marquee-item::after {
+    content: '—'; color: var(--accent); opacity: 0.7;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* SECTION COMMON */
+  section {
+    padding: 6rem 3rem;
+  }
+
+  .section-tag {
+    font-family: var(--font-mono); font-size: 0.7rem;
+    letter-spacing: 0.2em; color: var(--accent);
+    text-transform: uppercase;
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-tag::before {
+    content: ''; width: 16px; height: 1px; background: var(--accent);
+  }
+
+  h2.section-title {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 800; letter-spacing: -0.02em;
+    line-height: 1.05; margin-bottom: 1rem;
+  }
+
+  /* ABOUT */
+  .about {
+    background: var(--surface);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: start;
+  }
+
+  .about-body {
+    font-size: 1rem; color: var(--ink-2);
+    line-height: 1.8; margin-top: 1.5rem;
+  }
+
+  .about-body p { margin-bottom: 1.2rem; }
+
+  .about-right {
+    padding-top: 1rem;
+  }
+
+  .capability-list {
+    list-style: none; margin-top: 1.5rem;
+  }
+
+  .capability-list li {
+    padding: 1.2rem 0;
+    border-top: 1px solid var(--line);
+    display: flex; align-items: flex-start; gap: 1rem;
+  }
+
+  .cap-num {
+    font-family: var(--font-mono); font-size: 0.65rem;
+    color: var(--accent); letter-spacing: 0.1em;
+    padding-top: 0.15rem; flex-shrink: 0;
+  }
+
+  .cap-name {
+    font-size: 0.9rem; font-weight: 600; letter-spacing: 0.02em;
+    margin-bottom: 0.25rem;
+  }
+
+  .cap-desc {
+    font-size: 0.8rem; color: var(--ink-3);
+    font-family: var(--font-mono); line-height: 1.5;
+  }
+
+  /* PRODUCTS */
+  .products { background: var(--bg); }
+
+  .products-grid {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    border: 1px solid var(--line);
+  }
+
+  .product-card {
+    background: var(--surface);
+    padding: 2rem 1.75rem;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-card::after {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--accent);
+    transition: height 0.3s ease;
+  }
+
+  .product-card:hover { background: var(--white); }
+  .product-card:hover::after { height: 100%; }
+
+  .product-icon {
+    width: 44px; height: 44px;
+    border: 1px solid var(--line);
+    display: grid; place-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .product-icon svg {
+    width: 22px; height: 22px;
+    stroke: var(--ink-2); fill: none; stroke-width: 1.2;
+  }
+
+  .product-title {
+    font-size: 1rem; font-weight: 700;
+    letter-spacing: 0.01em; margin-bottom: 0.75rem;
+  }
+
+  .product-desc {
+    font-size: 0.78rem; color: var(--ink-3);
+    font-family: var(--font-mono); line-height: 1.6;
+  }
+
+  /* GALLERY */
+  .gallery { background: var(--ink); color: var(--bg); }
+  .gallery .section-tag { color: #c8440a; }
+  .gallery .section-tag::before { background: #c8440a; }
+  .gallery h2.section-title { color: var(--bg); }
+
+  .gallery-grid {
+    margin-top: 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 200px 180px;
+    gap: 0.5rem;
+  }
+
+  .gallery-item {
+    overflow: hidden; position: relative;
+    background: #2a2926;
+  }
+
+  .gallery-item:nth-child(1) { grid-column: 1 / 3; }
+  .gallery-item:nth-child(2) { grid-column: 3 / 5; }
+  .gallery-item:nth-child(3) { grid-column: 5 / 7; }
+  .gallery-item:nth-child(4) { grid-column: 1 / 4; }
+  .gallery-item:nth-child(5) { grid-column: 4 / 7; }
+
+  .gallery-item img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: grayscale(20%) brightness(0.95);
+    transition: transform 0.6s ease, filter 0.3s;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.06);
+    filter: grayscale(0%) brightness(1.05);
+  }
+
+  .gallery-item-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(26,25,23,0.6) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* WHY US */
+  .why { background: var(--surface); }
+
+  .why-grid {
+    margin-top: 3rem;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+
+  .why-card {
+    padding: 0;
+    border-top: 2px solid var(--line);
+    padding-top: 1.5rem;
+  }
+
+  .why-card.accent { border-top-color: var(--accent); }
+  .why-card.accent-2 { border-top-color: var(--accent-2); }
+
+  .why-number {
+    font-family: var(--font-mono); font-size: 0.65rem;
+    color: var(--ink-3); letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+  }
+
+  .why-card-title {
+    font-size: 1rem; font-weight: 700;
+    margin-bottom: 0.75rem; letter-spacing: 0.01em;
+  }
+
+  .why-card-body {
+    font-size: 0.78rem; color: var(--ink-3);
+    font-family: var(--font-mono); line-height: 1.6;
+  }
+
+  /* CONTACT */
+  .contact {
+    background: var(--bg);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: start;
+  }
+
+  .contact-info { padding-top: 0.5rem; }
+
+  .contact-detail {
+    margin-top: 2rem;
+    display: flex; flex-direction: column; gap: 1.5rem;
+  }
+
+  .contact-item {
+    display: flex; gap: 1rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .contact-item:last-child { border-bottom: none; }
+
+  .contact-item-icon {
+    width: 36px; height: 36px; flex-shrink: 0;
+    border: 1px solid var(--line);
+    display: grid; place-items: center;
+  }
+
+  .contact-item-icon svg {
+    width: 16px; height: 16px;
+    stroke: var(--ink-2); fill: none; stroke-width: 1.2;
+  }
+
+  .contact-item-label {
+    font-family: var(--font-mono); font-size: 0.65rem;
+    color: var(--ink-3); letter-spacing: 0.15em;
+    text-transform: uppercase; margin-bottom: 0.35rem;
+  }
+
+  .contact-item-value {
+    font-size: 0.9rem; font-weight: 500; line-height: 1.5;
+  }
+
+  .contact-form { padding-top: 0.5rem; }
+
+  .form-group { margin-bottom: 1.25rem; }
+
+  .form-label {
+    display: block; font-family: var(--font-mono);
+    font-size: 0.65rem; letter-spacing: 0.15em;
+    color: var(--ink-3); text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-input {
+    width: 100%; padding: 0.75rem 1rem;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    font-family: var(--font-mono); font-size: 0.82rem;
+    color: var(--ink);
+    outline: none; transition: border-color 0.2s;
+    appearance: none;
+  }
+
+  .form-input:focus { border-color: var(--ink); background: var(--white); }
+
+  textarea.form-input { resize: vertical; min-height: 120px; }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink); color: var(--bg);
+    padding: 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .footer-brand {
+    font-size: 0.85rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+
+  .footer-brand small {
+    display: block; font-size: 0.65rem; font-family: var(--font-mono);
+    color: rgba(244,243,239,0.4); letter-spacing: 0.15em; margin-top: 0.2rem;
+  }
+
+  .footer-copy {
+    font-family: var(--font-mono); font-size: 0.65rem;
+    color: rgba(244,243,239,0.35); letter-spacing: 0.08em;
+  }
+
+  /* DECORATIVE LINE */
+  .deco-line {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .deco-line-bar {
+    flex: 1; height: 1px; background: var(--line);
+  }
+
+  .deco-line-label {
+    font-family: var(--font-mono); font-size: 0.65rem;
+    color: var(--ink-3); letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  /* SCROLL ANIMATIONS */
+  .fade-up {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; }
+    .hero::before { display: none; }
+    .hero-img-grid { grid-template-rows: 180px 130px; }
+    section { padding: 4rem 1.5rem; }
+    .about, .contact { grid-template-columns: 1fr; gap: 3rem; }
+    .products-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr 1fr; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(5, 150px); }
+    .gallery-item { grid-column: auto !important; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-mark"><span></span></div>
+    <div class="nav-brand">
+      Nitin Engineering Works
+      <small>Est. Mumbai, Maharashtra</small>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get a Quote →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid-overlay"></div>
+
+  <div class="hero-left">
+    <div class="hero-tag">Tool & Die Specialists</div>
+    <h1 class="hero-title">
+      Precision<br>
+      <em>Engineered</em><br>
+      to Spec.
+    </h1>
+    <p class="hero-subtitle">
+      Mumbai's trusted precision stamping and tool & die manufacturer. We deliver sheet metal components with exact tolerances for industries that demand zero compromise.
+    </p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary">Our Capabilities</a>
+      <a href="#contact" class="btn-ghost">Request a Quote</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">30+</div>
+        <div class="stat-label">Years of experience</div>
+      </div>
+      <div>
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Components produced</div>
+      </div>
+      <div>
+        <div class="stat-num">±0.01</div>
+        <div class="stat-label">mm tolerance</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-img-grid">
+      <div class="img-a">
+        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80" alt="Precision engineering workshop">
+        <div class="img-label">Workshop Floor</div>
+      </div>
+      <div class="img-b">
+        <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=500&q=80" alt="Stamped metal parts">
+        <div class="img-label">Stamped Components</div>
+      </div>
+      <div class="img-c">
+        <img src="https://images.unsplash.com/photo-1565688534245-05d6b5be184a?w=400&q=80" alt="Quality inspection">
+        <div class="img-label">QC Inspection</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <div class="marquee-item">Progressive Dies</div>
+    <div class="marquee-item">Sheet Metal Stamping</div>
+    <div class="marquee-item">Tool & Die Making</div>
+    <div class="marquee-item">Precision Blanking</div>
+    <div class="marquee-item">Compound Dies</div>
+    <div class="marquee-item">Quality Inspection</div>
+    <div class="marquee-item">CNC Machining</div>
+    <div class="marquee-item">Prototype Tooling</div>
+    <!-- duplicate for seamless loop -->
+    <div class="marquee-item">Progressive Dies</div>
+    <div class="marquee-item">Sheet Metal Stamping</div>
+    <div class="marquee-item">Tool & Die Making</div>
+    <div class="marquee-item">Precision Blanking</div>
+    <div class="marquee-item">Compound Dies</div>
+    <div class="marquee-item">Quality Inspection</div>
+    <div class="marquee-item">CNC Machining</div>
+    <div class="marquee-item">Prototype Tooling</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about fade-up" id="about">
+  <div class="about-left">
+    <div class="section-tag">Who We Are</div>
+    <h2 class="section-title">Built on<br>Precision.</h2>
+    <div class="about-body">
+      <p>Nitin Engineering Works is a Mumbai-based precision tool & die manufacturer with decades of experience delivering high-quality stamped components to industries across India.</p>
+      <p>Located in Goregaon East, our facility houses advanced press machines and inspection equipment, allowing us to maintain tight tolerances from prototype through high-volume production runs.</p>
+      <p>We specialize in progressive, compound, and fine-blanking dies — producing parts that meet exact drawing specifications, every time.</p>
+    </div>
+  </div>
+  <div class="about-right">
+    <div class="section-tag">Core Capabilities</div>
+    <ul class="capability-list">
+      <li>
+        <span class="cap-num">01</span>
+        <div>
+          <div class="cap-name">Progressive Die Tooling</div>
+          <div class="cap-desc">Multi-stage stamping for complex components in a single press stroke.</div>
+        </div>
+      </li>
+      <li>
+        <span class="cap-num">02</span>
+        <div>
+          <div class="cap-name">Compound & Combination Dies</div>
+          <div class="cap-desc">Blanking, piercing and forming operations with minimal material waste.</div>
+        </div>
+      </li>
+      <li>
+        <span class="cap-num">03</span>
+        <div>
+          <div class="cap-name">Sheet Metal Stamping</div>
+          <div class="cap-desc">High-volume precision stamping on MS, SS, brass, copper and aluminium.</div>
+        </div>
+      </li>
+      <li>
+        <span class="cap-num">04</span>
+        <div>
+          <div class="cap-name">Quality Inspection</div>
+          <div class="cap-desc">100% first-article inspection and dimensional verification to drawing.</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products fade-up" id="products">
+  <div class="section-tag">What We Make</div>
+  <h2 class="section-title">Products &<br>Services</h2>
+
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><circle cx="17.5" cy="17.5" r="3.5"/></svg>
+      </div>
+      <div class="product-title">Progressive Dies</div>
+      <div class="product-desc">Multi-station tooling for complex stampings. Reduces handling and improves consistency across large production runs.</div>
+    </div>
+    <div class="product-card">
+      <div class="product-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="3" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="21"/><line x1="3" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="21" y2="12"/></svg>
+      </div>
+      <div class="product-title">Compound Dies</div>
+      <div class="product-desc">Simultaneous blanking and piercing in one stroke. Delivers flat, accurate parts with excellent edge quality.</div>
+    </div>
+    <div class="product-card">
+      <div class="product-icon">
+        <svg viewBox="0 0 24 24"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/></svg>
+      </div>
+      <div class="product-title">Precision Blanks</div>
+      <div class="product-desc">Flat and profiled blanks cut to tight tolerances from sheet coil stock. Supplied ready for secondary operations.</div>
+    </div>
+    <div class="product-card">
+      <div class="product-icon">
+        <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+      </div>
+      <div class="product-title">Formed Components</div>
+      <div class="product-desc">Bending, drawing and forming operations for brackets, channels, clips and structural metal parts.</div>
+    </div>
+    <div class="product-card">
+      <div class="product-icon">
+        <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <div class="product-title">Tool Repair & Refurbishment</div>
+      <div class="product-desc">Reconditioning of worn tooling to original specs. Extends die life and reduces replacement costs significantly.</div>
+    </div>
+    <div class="product-card">
+      <div class="product-icon">
+        <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </div>
+      <div class="product-title">Prototype Tooling</div>
+      <div class="product-desc">Fast-turnaround prototype dies for design validation before committing to production tooling investment.</div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery fade-up" id="gallery">
+  <div class="section-tag">Our Work</div>
+  <h2 class="section-title">From the<br>Shop Floor.</h2>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1565688534245-05d6b5be184a?w=700&q=80" alt="Workshop">
+      <div class="gallery-item-overlay"></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=600&q=80" alt="Metal parts">
+      <div class="gallery-item-overlay"></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80" alt="Engineer">
+      <div class="gallery-item-overlay"></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1567789884554-0b844b597180?w=700&q=80" alt="Stamping press">
+      <div class="gallery-item-overlay"></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=700&q=80" alt="CNC machine">
+      <div class="gallery-item-overlay"></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why fade-up">
+  <div class="section-tag">Why Choose Us</div>
+  <h2 class="section-title">The NEW Standard.</h2>
+  <div class="why-grid">
+    <div class="why-card accent">
+      <div class="why-number">01 / 04</div>
+      <div class="why-card-title">Decades of Domain Expertise</div>
+      <div class="why-card-body">Three generations of tool & die knowledge. We've built hundreds of dies across automotive, electrical, consumer and industrial sectors.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-number">02 / 04</div>
+      <div class="why-card-title">Tight Tolerance Commitment</div>
+      <div class="why-card-body">We hold ±0.01mm tolerances consistently, backed by CMM inspection and first-article reports on every new job.</div>
+    </div>
+    <div class="why-card accent-2">
+      <div class="why-number">03 / 04</div>
+      <div class="why-card-title">Fast Turnaround</div>
+      <div class="why-card-body">In-house toolroom with modern wire EDM and CNC equipment. Prototype dies in days, not weeks. Production tooling on schedule.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-number">04 / 04</div>
+      <div class="why-card-title">Mumbai-Based Reliability</div>
+      <div class="why-card-body">Conveniently located at Goregaon East. Quick site visits, accessible team, direct communication — no middlemen.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact fade-up" id="contact">
+  <div class="contact-info">
+    <div class="section-tag">Reach Out</div>
+    <h2 class="section-title">Let's Build<br>Together.</h2>
+    <div class="contact-detail">
+      <div class="contact-item">
+        <div class="contact-item-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <div class="contact-item-label">Address</div>
+          <div class="contact-item-value">Unit No. 55, Satguru Nanik Indl. Estate,<br>New Western Urban Rd, near Jay Coach,<br>Goregaon East, Mumbai — 400 063</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.48h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div>
+          <div class="contact-item-label">Phone</div>
+          <div class="contact-item-value">022 2685 4622</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <div class="contact-item-label">Working Hours</div>
+          <div class="contact-item-value">Monday – Saturday<br>9:00 AM – 6:00 PM IST</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-form">
+    <div class="section-tag">Send an Enquiry</div>
+    <div class="form-group">
+      <label class="form-label">Full Name</label>
+      <input type="text" class="form-input" placeholder="Your name">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Company</label>
+      <input type="text" class="form-input" placeholder="Company or organisation">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Phone / Email</label>
+      <input type="text" class="form-input" placeholder="How should we reach you?">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Requirement</label>
+      <textarea class="form-input" placeholder="Describe your tooling or stamping requirement…"></textarea>
+    </div>
+    <button class="btn-primary" style="width: 100%; cursor: pointer;">Send Enquiry →</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">
+      Nitin Engineering Works
+      <small>Unit No. 55, Goregaon East, Mumbai — 400 063</small>
+    </div>
+  </div>
+  <div class="footer-copy">© 2026 Nitin Engineering Works. All rights reserved.</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.12 }
+  );
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
